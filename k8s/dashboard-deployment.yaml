@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nids-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nids-dashboard
+  template:
+    metadata:
+      labels:
+        app: nids-dashboard
+    spec:
+      containers:
+        - name: nids-dashboard
+          image: nids-ai:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - streamlit
+            - run
+            - src/dashboard.py
+            - --server.address=0.0.0.0
+            - --server.port=8501
+          env:
+            - name: API_URL
+              value: "http://nids-api:8000/predict"
+          ports:
+            - containerPort: 8501

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nids-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nids-api
+  template:
+    metadata:
+      labels:
+        app: nids-api
+    spec:
+      containers:
+        - name: nids-api
+          image: nids-ai:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - uvicorn
+            - src.api:app
+            - --host
+            - "0.0.0.0"
+            - --port
+            - "8000"
+          ports:
+            - containerPort: 8000
