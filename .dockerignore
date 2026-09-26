@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+
+data/TrafficLabelling/
+data/processed/
+data/training/
+
+*.ipynb
+.vscode/
