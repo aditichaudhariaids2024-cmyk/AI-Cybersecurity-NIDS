@@ -16,14 +16,39 @@ spec:
         - name: nids-dashboard
           image: nids-ai:latest
           imagePullPolicy: IfNotPresent
+
           command:
             - streamlit
             - run
             - src/dashboard.py
             - --server.address=0.0.0.0
             - --server.port=8501
+
           env:
             - name: API_URL
               value: "http://nids-api:8000/predict"
+
           ports:
             - containerPort: 8501
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+            initialDelaySeconds: 30
+            periodSeconds: 20
