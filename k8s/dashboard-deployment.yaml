@@ -25,9 +25,11 @@ spec:
             - --server.port=8501
 
           env:
-            - name: API_URL
-              value: "http://nids-api:8000/predict"
-
+        - name: API_URL
+    valueFrom:
+      configMapKeyRef:
+        name: nids-config
+        key: API_URL
           ports:
             - containerPort: 8501
 

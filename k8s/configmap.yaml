@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nids-config
+data:
+  API_URL: "http://nids-api:8000/predict"
