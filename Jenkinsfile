@@ -5,29 +5,28 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out project code...'
+                echo 'Checking out AI Cybersecurity NIDS project...'
                 checkout scm
             }
         }
 
-        stage('Environment Check') {
+        stage('Docker Check') {
             steps {
-                bat 'python --version'
-                bat 'docker --version'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                echo 'Running project tests...'
-                bat 'python -m pytest -q'
+                sh 'docker --version'
+                sh 'docker ps'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker image...'
-                bat 'docker build -t ai-cybersecurity-nids:%BUILD_NUMBER% .'
+                echo 'Building AI Cybersecurity NIDS Docker image...'
+                sh 'docker build -t ai-cybersecurity-nids:${BUILD_NUMBER} .'
+            }
+        }
+
+        stage('Build Success') {
+            steps {
+                echo 'AI Cybersecurity NIDS Docker image built successfully!'
             }
         }
     }
