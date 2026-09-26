@@ -2,13 +2,16 @@ venv/
 __pycache__/
 *.pyc
 
+# Dataset files - DO NOT upload to GitHub
 data/TrafficLabelling/
 data/processed/
 data/training/
 data/MachineLearningCSV/
 
+# IDE / environment files
 .ipynb_checkpoints/
 .vscode/
 .env
+*.log
 .DS_Store
 Thumbs.db

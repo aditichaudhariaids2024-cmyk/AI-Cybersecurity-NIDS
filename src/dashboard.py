@@ -1,13 +1,17 @@
 import streamlit as st
 import pandas as pd
 import requests
+import os
 
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
 
-API_URL = "http://127.0.0.1:8000/predict"
+API_URL = API_URL = os.getenv(
+    "API_URL",
+    "http://127.0.0.1:8000/predict"
+)
 DATA_FILE = "data/training/nids_training_dataset.csv"
 
 
